@@ -1,7 +1,6 @@
 package site.dunhanson.concurrency.demo.juc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -14,28 +13,28 @@ public class ReadWriteLockExample {
     private List<String> dataList = new ArrayList<>();
 
     public void add(String data) {
-        System.out.println(Thread.currentThread().getId() + "-add方法，try get lock");
+        System.out.println(Thread.currentThread().getId() + "-add方法, try get lock");
         writeLock.lock();
         try {
-            System.out.println(Thread.currentThread().getId() + "-add方法，lock");
+            System.out.println(Thread.currentThread().getId() + "-add方法, lock");
             dataList.add(data);
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
-            System.out.println(Thread.currentThread().getId() + "-add方法，unlock");
+            System.out.println(Thread.currentThread().getId() + "-add方法, unlock");
             writeLock.unlock();
         }
     }
 
     public String get(int idx) {
-        System.out.println(Thread.currentThread().getId() + "-get方法，try get lock");
+        System.out.println(Thread.currentThread().getId() + "-get方法, try get lock");
         readLock.lock();
         try {
-            System.out.println(Thread.currentThread().getId() + "-get方法，lock");
+            System.out.println(Thread.currentThread().getId() + "-get方法, lock");
             return dataList.get(idx);
         } finally {
-            System.out.println(Thread.currentThread().getId() + "-get方法，unlock");
+            System.out.println(Thread.currentThread().getId() + "-get方法, unlock");
             readLock.unlock();
         }
     }
