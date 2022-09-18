@@ -1,5 +1,8 @@
 package site.dunhanson.concurrency.demo.basic;
 
+import lombok.Data;
+
+@Data
 public class Resource {
     private String name;
     private int count;
