@@ -23,6 +23,7 @@ class SpringBootMongoDemoApplicationTests {
         employee.setGender("M");
         employee.setHireDate(LocalDate.parse("1986-06-26"));
         mongoTemplate.insert(employee);
+        System.out.println(employee.getId());
     }
 
 }
