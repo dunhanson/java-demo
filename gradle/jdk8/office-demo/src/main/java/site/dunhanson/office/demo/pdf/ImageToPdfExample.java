@@ -75,7 +75,7 @@ public class ImageToPdfExample {
      * 图片带文字
      */
     public void testImageWithText() throws IOException {
-        String imagePath = "D:\\Test\\guangzi\\A03_1663292971076.png";
+        String imagePath = "D:\\Test\\guangzi\\D01_1663749898688.png";
         Image image = Image.getInstance(imagePath);
         float width = image.getWidth();
         float height = image.getHeight() + 200;
