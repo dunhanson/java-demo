@@ -1,4 +1,4 @@
-package collection;
+package collection.queue;
 
 import java.time.LocalDate;
 import java.util.PriorityQueue;
