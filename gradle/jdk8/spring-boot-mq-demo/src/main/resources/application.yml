@@ -1,0 +1,9 @@
+#spring.kafka.bootstrap-servers=192.168.33.31:9092,192.168.33.32:9092,192.168.33.33:9092
+#spring.kafka.bootstrap-servers=127.0.0.1:31476
+#spring.kafka.client-id=spring-boot-mq-demo
+
+spring:
+  kafka:
+    bootstrap-servers: 127.0.0.1:31476
+    consumer:
+      group-id: spring-boot-mq-demo
