@@ -1,0 +1,5 @@
+spring:
+  kafka:
+    bootstrap-servers: 118.178.180.141:9092
+    consumer:
+      group-id: spring-boot-mq-demo

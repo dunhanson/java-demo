@@ -2,8 +2,9 @@ package site.dunhanson.sdk.demo.aliyun;
 
 import com.aliyun.dysmsapi20170525.models.AddShortUrlResponse;
 import com.aliyun.tea.TeaException;
+import site.dunhanson.sdk.demo.aliyun.utils.AliyunUtils;
 
-public class ShortUrlExample {
+public class ShortLinkExample {
 
     /**
      * 使用AK&SK初始化账号Client
@@ -25,7 +26,7 @@ public class ShortUrlExample {
 
     public static void main(String[] args_) throws Exception {
         java.util.List<String> args = java.util.Arrays.asList(args_);
-        com.aliyun.dysmsapi20170525.Client client = ShortUrlExample.createClient(AliyunUtils.accessKeyId, AliyunUtils.accessKeySecret);
+        com.aliyun.dysmsapi20170525.Client client = ShortLinkExample.createClient(AliyunUtils.accessKeyId, AliyunUtils.accessKeySecret);
         com.aliyun.dysmsapi20170525.models.AddShortUrlRequest addShortUrlRequest = new com.aliyun.dysmsapi20170525.models.AddShortUrlRequest()
                 .setSourceUrl("https://attachment-hub.oss-cn-hangzhou.aliyuncs.com/0000/credit_china/2022-09-27-6332a0948505640001e30bf1.zip?Expires=1665422886&OSSAccessKeyId=TMP.3Ke9PAiKD5piWSkaRXMHDjJoqZQoEidej58W1s2YgsvZCpPubAZ7srbbp2e3xWRuWMPYscZv1y8RagyTZKFKTXkR4mw74J&Signature=wDsMkXSM8qW1SiYLsRVCvgbP4Tg%3D")
                 .setShortUrlName("阿里短链测试")
