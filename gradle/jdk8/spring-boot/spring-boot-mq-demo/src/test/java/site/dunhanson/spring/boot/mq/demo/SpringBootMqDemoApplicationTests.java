@@ -13,7 +13,7 @@ class SpringBootMqDemoApplicationTests {
 
     @Test
     void test() {
-        kafkaTemplate.send("test-20221013", "hello");
+        kafkaTemplate.send("test", "hello");
     }
 
 }

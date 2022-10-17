@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class Consumer {
 
-    @KafkaListener(topics = "test-20221013")
+    @KafkaListener(topics = "test")
     public void test(String message) {
         log.info("message:{}", message);
     }
