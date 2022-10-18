@@ -5,6 +5,11 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * PriorityQueue和Queue的区别在于，它的出队顺序与元素的优先级有关，
+ * @author dunhanson
+ * @since 2022-10-18
+ */
 public class PriorityQueueExample {
 
     @Data
