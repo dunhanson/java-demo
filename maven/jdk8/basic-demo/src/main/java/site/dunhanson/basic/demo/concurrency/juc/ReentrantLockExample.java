@@ -15,6 +15,7 @@ public class ReentrantLockExample {
     private final ReentrantLock lock = new ReentrantLock();
     private int count = 0;
     public void incr() {
+
         lock.lock();
         count++;
         lock.unlock();
