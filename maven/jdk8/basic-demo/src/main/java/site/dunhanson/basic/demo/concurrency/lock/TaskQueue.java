@@ -1,4 +1,4 @@
-package site.dunhanson.basic.demo.concurrency.basic;
+package site.dunhanson.basic.demo.concurrency.lock;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
