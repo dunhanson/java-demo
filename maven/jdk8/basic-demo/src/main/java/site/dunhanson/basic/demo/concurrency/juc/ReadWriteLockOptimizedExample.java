@@ -22,7 +22,7 @@ public class ReadWriteLockOptimizedExample {
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     private final Lock readLock = readWriteLock.readLock();
     private final Lock writeLock = readWriteLock.writeLock();
-    private List<String> dataList = new ArrayList<>();
+    private final List<String> dataList = new ArrayList<>();
 
     public ReadWriteLockOptimizedExample() {
         for(int i = 0; i < 1000; i++) {
