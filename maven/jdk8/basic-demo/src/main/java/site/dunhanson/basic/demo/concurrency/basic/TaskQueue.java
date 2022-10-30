@@ -8,6 +8,11 @@ import java.util.Queue;
 /**
  * 使用wait和notify
  *
+ * <p>模拟阻塞队列？<br>
+ * 想要的执行效果：<br>
+ * 线程1可以调用addTask()不断往队列中添加任务；<br>
+ * 线程2可以调用getTask()从队列中获取任务。如果队列为空，则getTask()应该等待，直到队列中至少有一个任务时再返回。
+ *
  * <p>TaskQueue<br>
  * 1、TaskQueue中包含一个queue集合属性，LinkedList实现类。<br>
  * 2、两个方法：addTask、getTask<br>
@@ -43,38 +48,46 @@ public class TaskQueue {
         return queue.remove();
     }
 
-
+    /**
+     * 1、创建五个t线程，线程内部while(true)循环：从队列当中获取数据，然后进行打印
+     * 2、创建一个add线程，添加是个随机数到队列当中
+     * @param args String[]
+     */
     public static void main(String[] args) throws InterruptedException {
+        // 1、创建五个t线程，线程内部while(true)循环：从队列当中获取数据，然后进行打印（其实就是模拟五个消费端线程）
         TaskQueue q = new TaskQueue();
         List<Thread> ts = new ArrayList<>();
-        for (int i=0; i<5; i++) {
+        for (int i = 0; i < 5; i++) {
             Thread t = new Thread(() -> {
-                // 执行task:
-                while (true) {
-                    try {
-                        String s = q.getTask();
-                        System.out.println("execute task: " + s);
-                    } catch (InterruptedException e) {
-                        return;
-                    }
-                }
+               while (true) {
+                   try {
+                       String s = q.getTask();
+                       System.out.println("execute task: " + s);
+                   } catch (InterruptedException ignored) {
+
+                   }
+               }
             });
             t.start();
             ts.add(t);
         }
-        Thread add = new Thread(() -> {
-            for (int i=0; i<10; i++) {
-                // 放入task:
-                String s = "t-" + Math.random();
-                System.out.println("add task: " + s);
-                q.addTask(s);
-                try { Thread.sleep(100); } catch(InterruptedException ignored) {}
-            }
+        // 2、创建一个add线程，添加是个随机数到队列当中
+        Thread add = new Thread(()->{
+           for (int i = 0; i < 10; i++) {
+               String s = "t-" + Math.random();
+               System.out.println("add task: " + s);
+               q.addTask(s);
+               try {
+                   Thread.sleep(100);
+               } catch (InterruptedException ignored) {
+
+               }
+           }
         });
         add.start();
         add.join();
         Thread.sleep(100);
-        for (Thread t : ts) {
+        for(Thread t : ts) {
             t.interrupt();
         }
     }
