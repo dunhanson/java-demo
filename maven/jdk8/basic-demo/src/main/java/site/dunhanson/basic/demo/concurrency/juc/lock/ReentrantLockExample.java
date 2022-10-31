@@ -1,4 +1,4 @@
-package site.dunhanson.basic.demo.concurrency.juc;
+package site.dunhanson.basic.demo.concurrency.juc.lock;
 
 import java.util.concurrent.locks.ReentrantLock;
 
