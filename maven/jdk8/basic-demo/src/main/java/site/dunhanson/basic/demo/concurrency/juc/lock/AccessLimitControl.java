@@ -1,6 +1,11 @@
 package site.dunhanson.basic.demo.concurrency.juc.lock;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -15,9 +20,26 @@ public class AccessLimitControl {
     public String access() throws InterruptedException {
         semaphore.acquire();
         try {
-            return UUID.randomUUID().toString();
+            Thread.sleep(5000);
+            return Thread.currentThread().getName() + "-"
+                    + UUID.randomUUID() + "-"
+                    + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);
         } finally {
             semaphore.release();
+        }
+    }
+
+    public static void main(String[] args) {
+        AccessLimitControl control = new AccessLimitControl();
+        ExecutorService service = Executors.newFixedThreadPool(4);
+        for(int i = 1; i <= 4; i++) {
+            service.submit(()->{
+                try {
+                    System.out.println(control.access());
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
     }
 }
