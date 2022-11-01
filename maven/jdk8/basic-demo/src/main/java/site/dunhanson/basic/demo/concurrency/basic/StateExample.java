@@ -54,7 +54,6 @@ public class StateExample {
         StateExample.sleep(1000);
         System.out.println("4:" + t0.getState());
         // 5:TIMED_WAITING
-        StateExample.sleep(100);
         System.out.println("5:" + t1.getState());
         // 6:TERMINATED
         StateExample.sleep(2000);
