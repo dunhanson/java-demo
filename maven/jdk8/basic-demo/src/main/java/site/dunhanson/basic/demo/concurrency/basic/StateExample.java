@@ -12,6 +12,14 @@ package site.dunhanson.basic.demo.concurrency.basic;
  * @since 2022-11-01
  */
 public class StateExample {
+
+    private static void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private synchronized void say() {
         String name = Thread.currentThread().getName();
         System.out.println(name + " say hello");
@@ -33,33 +41,23 @@ public class StateExample {
         StateExample example = new StateExample();
         Thread t0 = new Thread(example::say);
         Thread t1 = new Thread(example::say);
+        // 1:NEW
         System.out.println("1:" + t0.getState());
         t0.start();
         t1.start();
+        // 2:RUNNABLE
         System.out.println("2:" + t1.getState());
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        StateExample.sleep(100);
+        // 3:BLOCKED
         System.out.println("3:" + t1.getState());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        StateExample.sleep(1000);
+        // 4:WAITING
         System.out.println("4:" + t0.getState());
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        StateExample.sleep(100);
+        // 5:TIMED_WAITING
         System.out.println("5:" + t1.getState());
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        StateExample.sleep(2000);
+        // 6:TERMINATED
         System.out.println("6:" + t1.getState());
         t0.join();
         t1.join();
