@@ -28,9 +28,6 @@ public class StateExample {
             if(name.contains("Thread-0")) {
                 this.wait();
             }
-            if(name.contains("Thread-1")) {
-                Thread.sleep(1000);
-            }
             this.notifyAll();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -56,7 +53,7 @@ public class StateExample {
         // 5:TIMED_WAITING
         System.out.println("5:" + t1.getState());
         // 6:TERMINATED
-        StateExample.sleep(2000);
+        StateExample.sleep(1000);
         System.out.println("6:" + t1.getState());
         t0.join();
         t1.join();
