@@ -23,12 +23,13 @@ public class StateExample {
             if(name.contains("Thread-1")) {
                 Thread.sleep(1000);
             }
+            this.notifyAll();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         StateExample example = new StateExample();
         Thread t0 = new Thread(example::say);
         Thread t1 = new Thread(example::say);
@@ -36,30 +37,32 @@ public class StateExample {
         t0.start();
         t1.start();
         System.out.println("2:" + t1.getState());
-        System.out.println("3:" + t0.getState());
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("4:" + t1.getState());
+        System.out.println("3:" + t1.getState());
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("5:" + t0.getState());
+        System.out.println("4:" + t0.getState());
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("6:" + t1.getState());
+        System.out.println("5:" + t1.getState());
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("7:" + t1.getState());
+        System.out.println("6:" + t1.getState());
+        t0.join();
+        t1.join();
+        System.out.println("finish.");
     }
 }
