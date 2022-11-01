@@ -43,7 +43,7 @@ public class StateExample {
         t0.start();
         t1.start();
         // 2:RUNNABLE
-        System.out.println("2:" + t1.getState());
+        System.out.println("2:" + t0.getState());
         // 3:BLOCKED
         StateExample.sleep(100);
         System.out.println("3:" + t1.getState());
