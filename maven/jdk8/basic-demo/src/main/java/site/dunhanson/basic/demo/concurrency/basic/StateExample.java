@@ -47,17 +47,17 @@ public class StateExample {
         t1.start();
         // 2:RUNNABLE
         System.out.println("2:" + t1.getState());
-        StateExample.sleep(100);
         // 3:BLOCKED
-        System.out.println("3:" + t1.getState());
-        StateExample.sleep(1000);
-        // 4:WAITING
-        System.out.println("4:" + t0.getState());
         StateExample.sleep(100);
+        System.out.println("3:" + t1.getState());
+        // 4:WAITING
+        StateExample.sleep(1000);
+        System.out.println("4:" + t0.getState());
         // 5:TIMED_WAITING
+        StateExample.sleep(100);
         System.out.println("5:" + t1.getState());
-        StateExample.sleep(2000);
         // 6:TERMINATED
+        StateExample.sleep(2000);
         System.out.println("6:" + t1.getState());
         t0.join();
         t1.join();
