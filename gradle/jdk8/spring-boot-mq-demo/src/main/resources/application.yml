@@ -4,6 +4,8 @@
 
 spring:
   kafka:
-    bootstrap-servers: 127.0.0.1:31476
+    bootstrap-servers: 192.168.3.138:39092
     consumer:
       group-id: spring-boot-mq-demo
+      properties:
+        max.poll.interval.ms: 360000
