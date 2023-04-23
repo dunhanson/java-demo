@@ -1,9 +1,0 @@
-spring:
-  kafka:
-    bootstrap-servers: 47.98.57.0:32294
-    consumer:
-      group-id: spring-boot-mq-demo-consumer
-    producer:
-      client-id: spring-boot-mq-demo-producer
-    listener:
-      poll-timeout: 60000
