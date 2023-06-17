@@ -9,6 +9,14 @@ import java.util.concurrent.Future;
 @Slf4j
 public class PoolExample {
 
+    /**
+     * 线程池使用的简单例子
+     * <p>1、从工具类中获取线程池（进行复用，每个业务单独设置一个专属的线程池）</p>
+     * <p>2、创建一个专门用来存放Future的集合</p>
+     * <p>3、线程池运行任务，把Future添加到List集合中</p>
+     * <p>4、统计执行成功的数量</p>
+     * @param args 参数
+     */
     public static void main(String[] args) {
         // 1、从工具类中获取线程池（进行复用，每个业务单独设置一个专属的线程池）
         // 如果你的Java项目中有多个场景需要使用线程池，那么最好为每一个业务场景使用独立的线程池，不要让所有的场景共用一个线程池。
