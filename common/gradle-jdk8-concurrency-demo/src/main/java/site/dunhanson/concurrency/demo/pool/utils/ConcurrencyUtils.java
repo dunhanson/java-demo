@@ -20,7 +20,7 @@ public class ConcurrencyUtils {
      * 线程池常量，试用场景：A业务
      */
     public static final ExecutorService EXECUTOR_SERVICE_A = Executors.newFixedThreadPool(
-            5,
+            10,
             new CustomNameThreadFactory("A")
     );
 
