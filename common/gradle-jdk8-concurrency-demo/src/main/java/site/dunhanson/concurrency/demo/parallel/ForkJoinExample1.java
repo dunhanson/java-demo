@@ -3,7 +3,7 @@ package site.dunhanson.concurrency.demo.parallel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
-import site.dunhanson.concurrency.demo.common.utils.CommonUtils;
+import site.dunhanson.concurrency.demo.utils.CommonUtils;
 import site.dunhanson.concurrency.demo.common.CustomNameForkJoinWorkerThreadFactory;
 
 import java.util.ArrayList;

@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture;
  * @version 1.0.0
  */
 @Slf4j
-public class CompletableFutureExample {
+public class StartExample {
     public static void main(String[] args) {
         CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> {
             String str = "hello,world";

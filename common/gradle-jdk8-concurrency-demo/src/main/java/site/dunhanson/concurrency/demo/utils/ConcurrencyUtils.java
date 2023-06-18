@@ -1,7 +1,6 @@
-package site.dunhanson.concurrency.demo.common.utils;
+package site.dunhanson.concurrency.demo.utils;
 
 import site.dunhanson.concurrency.demo.common.CustomNameThreadFactory;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,12 +16,18 @@ public class ConcurrencyUtils {
     }
 
     /**
-     * 线程池常量，试用场景：A业务
+     * 获取自定义名称的Executor
+     * @param name 线程名称
+     * @param threads 线程数量
+     * @return Executor
      */
-    public static final ExecutorService EXECUTOR_SERVICE_A = Executors.newFixedThreadPool(
-            10,
-            new CustomNameThreadFactory("A")
-    );
+    public static ExecutorService getCustomNameExecutor(String name, int threads)  {
+        return Executors.newFixedThreadPool(
+                threads,
+                new CustomNameThreadFactory(name)
+        );
+    }
+
 
     /**
      * 关闭ExecutorService

@@ -2,7 +2,6 @@ package site.dunhanson.concurrency.demo.pool;
 
 import lombok.extern.slf4j.Slf4j;
 import site.dunhanson.concurrency.demo.common.CustomNameThreadFactory;
-import site.dunhanson.concurrency.demo.common.utils.ConcurrencyUtils;
 
 import java.util.ArrayList;
 import java.util.List;

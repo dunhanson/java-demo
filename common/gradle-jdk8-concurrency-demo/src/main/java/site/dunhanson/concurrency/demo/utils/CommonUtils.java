@@ -1,4 +1,4 @@
-package site.dunhanson.concurrency.demo.common.utils;
+package site.dunhanson.concurrency.demo.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
@@ -36,5 +36,13 @@ public class CommonUtils {
             list.add(map);
         }
         return list;
+    }
+
+    /**
+     * 完成
+     * <p>最后一步操作</p>
+     */
+    public static void finish() {
+        log.info("finish.");
     }
 }

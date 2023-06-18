@@ -7,7 +7,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static site.dunhanson.concurrency.demo.common.utils.ConcurrencyUtils.stopExecutorService;
+import static site.dunhanson.concurrency.demo.utils.ConcurrencyUtils.stopExecutorService;
 
 /**
  * CompletableFuture例子-异组合多个CompletableFuture对象
@@ -16,7 +16,7 @@ import static site.dunhanson.concurrency.demo.common.utils.ConcurrencyUtils.stop
  * @version 1.0.0
  */
 @Slf4j
-public class CompletableFutureExample3 {
+public class ThenCombineExample3 {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(
                 5,

@@ -2,8 +2,8 @@ package site.dunhanson.concurrency.demo.pool;
 
 import cn.hutool.core.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
-import site.dunhanson.concurrency.demo.common.utils.CommonUtils;
-import site.dunhanson.concurrency.demo.common.utils.ConcurrencyUtils;
+import site.dunhanson.concurrency.demo.utils.CommonUtils;
+import site.dunhanson.concurrency.demo.utils.ConcurrencyUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +23,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class PoolExample1 {
     public static void main(String[] args) {
-        ExecutorService executorService = ConcurrencyUtils.EXECUTOR_SERVICE_A;
+        ExecutorService executorService = ConcurrencyUtils.getCustomNameExecutor(
+                PoolExample1.class.getName(), 10
+        );
         long startTimeMillis = System.currentTimeMillis();
         int total = 10000;
         int pageSize = 1000;
