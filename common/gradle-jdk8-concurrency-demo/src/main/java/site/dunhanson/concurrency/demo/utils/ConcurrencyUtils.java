@@ -28,6 +28,18 @@ public class ConcurrencyUtils {
         );
     }
 
+    /**
+     * 获取自定义名称的Executor
+     * @param name 线程名称
+     * @return Executor
+     */
+    public static ExecutorService getCustomNameExecutor(String name)  {
+        return Executors.newFixedThreadPool(
+                Runtime.getRuntime().availableProcessors(),
+                new CustomNameThreadFactory(name)
+        );
+    }
+
 
     /**
      * 关闭ExecutorService

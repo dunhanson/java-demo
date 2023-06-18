@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class PoolExample1 {
     public static void main(String[] args) {
         ExecutorService executorService = ConcurrencyUtils.getCustomNameExecutor(
-                PoolExample1.class.getName(), 10
+                PoolExample1.class.getName()
         );
         long startTimeMillis = System.currentTimeMillis();
         int total = 10000;
