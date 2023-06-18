@@ -2,7 +2,7 @@ package site.dunhanson.concurrency.demo.single;
 
 import cn.hutool.core.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
-import site.dunhanson.concurrency.demo.common.CommonUtils;
+import site.dunhanson.concurrency.demo.common.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;

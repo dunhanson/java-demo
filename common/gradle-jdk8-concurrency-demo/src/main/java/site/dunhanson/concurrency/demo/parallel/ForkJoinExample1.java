@@ -3,19 +3,13 @@ package site.dunhanson.concurrency.demo.parallel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
-import site.dunhanson.concurrency.demo.common.CommonUtils;
-import site.dunhanson.concurrency.demo.pool.common.CustomNameForkJoinWorkerThreadFactory;
-import site.dunhanson.concurrency.demo.pool.common.CustomNameThreadFactory;
+import site.dunhanson.concurrency.demo.common.utils.CommonUtils;
+import site.dunhanson.concurrency.demo.common.CustomNameForkJoinWorkerThreadFactory;
 
-import javax.print.DocFlavor;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.ForkJoinWorkerThread;
 import java.util.concurrent.RecursiveTask;
 
 /**

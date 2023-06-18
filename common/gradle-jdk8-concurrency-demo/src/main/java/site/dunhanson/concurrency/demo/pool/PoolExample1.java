@@ -2,8 +2,8 @@ package site.dunhanson.concurrency.demo.pool;
 
 import cn.hutool.core.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
-import site.dunhanson.concurrency.demo.common.CommonUtils;
-import site.dunhanson.concurrency.demo.pool.utils.ConcurrencyUtils;
+import site.dunhanson.concurrency.demo.common.utils.CommonUtils;
+import site.dunhanson.concurrency.demo.common.utils.ConcurrencyUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
