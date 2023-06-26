@@ -1,9 +1,12 @@
 package site.dunhanson.concurrency.demo.pool;
 
 import lombok.extern.slf4j.Slf4j;
+import site.dunhanson.concurrency.demo.common.CustomNameThreadFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 @Slf4j
@@ -20,7 +23,10 @@ public class PoolExample {
     public static void main(String[] args) {
         // 1、从工具类中获取线程池（进行复用，每个业务单独设置一个专属的线程池）
         // 如果你的Java项目中有多个场景需要使用线程池，那么最好为每一个业务场景使用独立的线程池，不要让所有的场景共用一个线程池。
-        ExecutorService executorService = ConcurrencyUtils.EXECUTOR_SERVICE_A;
+        ExecutorService executorService = Executors.newFixedThreadPool(
+                10,
+                new CustomNameThreadFactory("PoolExample")
+        );
 
         // 2、创建一个专门用来存放Future的集合
         List<Future<Boolean>> submitResultList = new ArrayList<>();
