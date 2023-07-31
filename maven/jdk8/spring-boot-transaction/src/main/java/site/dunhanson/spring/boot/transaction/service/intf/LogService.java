@@ -14,4 +14,8 @@ import site.dunhanson.spring.boot.transaction.model.entity.LogEntity;
 public interface LogService extends IService<LogEntity> {
 
     int add(LogEntity log);
+
+    int add1(LogEntity log);
+
+    int add2(LogEntity log);
 }

@@ -14,4 +14,8 @@ import site.dunhanson.spring.boot.transaction.model.entity.UserEntity;
 public interface UserService extends IService<UserEntity> {
 
     int add(UserEntity user);
+
+    int add1(UserEntity user);
+
+    int add2(UserEntity user);
 }

@@ -32,4 +32,26 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, LogEntity> implements
         TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         return result;
     }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Override
+    public int add1(LogEntity entity) {
+        int result = this.baseMapper.insert(entity);
+        log.info("添加日志的结果:{}", result);
+        // 回滚事务，模仿发生异常
+        // 这里为什么不写一个异常呢？因为异常会传递到外面的方法。
+        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        return result;
+    }
+
+    @Transactional(propagation = Propagation.NESTED)
+    @Override
+    public int add2(LogEntity entity) {
+        int result = this.baseMapper.insert(entity);
+        log.info("添加日志的结果:{}", result);
+        // 回滚事务，模仿发生异常
+        // 这里为什么不写一个异常呢？因为异常会传递到外面的方法。
+        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        return result;
+    }
 }

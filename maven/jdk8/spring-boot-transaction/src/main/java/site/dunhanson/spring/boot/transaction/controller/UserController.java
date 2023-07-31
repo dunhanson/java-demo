@@ -28,8 +28,10 @@ import java.util.Objects;
 public class UserController {
     @Resource
     private UserService userService;
+    // 数据源事务管理器
     @Resource
     private DataSourceTransactionManager dataSourceTransactionManager;
+    // 事务定义
     @Resource
     private TransactionDefinition transactionDefinition;
 
@@ -123,6 +125,24 @@ public class UserController {
         user.setUsername(username);
         user.setPassword(password);
         return userService.add(user);
+    }
+
+    @RequestMapping("add1")
+    @Transactional(propagation =  Propagation.REQUIRES_NEW)
+    public int add1(String username, String password) {
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+        user.setPassword(password);
+        return userService.add1(user);
+    }
+
+    @RequestMapping("add2")
+    @Transactional(propagation =  Propagation.NESTED)
+    public int add2(String username, String password) {
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+        user.setPassword(password);
+        return userService.add2(user);
     }
 }
 
