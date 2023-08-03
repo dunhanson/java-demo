@@ -1,5 +1,6 @@
 package site.dunhanson.spring.boot.transaction;
 
+import cn.hutool.core.thread.ThreadUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
@@ -29,15 +30,28 @@ public class RepeatableReadTest {
         thread.start();
 
         // 让updateBalance执行
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ThreadUtil.safeSleep(100);
 
         // 3、在当前事务中读取用户余额
         int balance = userService.getBalanceByIdReadUncommitted(userId);
         System.out.println("User balance: " + balance);
+        // 4、等待线程执行完毕
+        thread.join();
+    }
+
+    @Test
+    public void testPhantomRead() throws InterruptedException {
+        Assert.isTrue(true, "success");
+        // 1、两次读取
+        userService.readWithPhantomRead(500);
+
+        // 2、睡眠100毫秒，让第一次读取成功
+        ThreadUtil.safeSleep(100);
+
+        // 3、使用新线程来执行新增操作
+        Thread thread = new Thread(() -> userService.saveSimple(UserEntity.builder().name(UUID.randomUUID().toString()).balance(500).build()));
+        thread.start();
+
         // 4、等待线程执行完毕
         thread.join();
     }

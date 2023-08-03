@@ -1,6 +1,7 @@
 package site.dunhanson.spring.boot.transaction.service.impl;
 
 import cn.hutool.core.thread.ThreadUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -8,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import site.dunhanson.spring.boot.transaction.dao.UserMapper;
 import site.dunhanson.spring.boot.transaction.model.entity.UserEntity;
 import site.dunhanson.spring.boot.transaction.service.intf.UserService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -94,8 +97,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
         // 2、睡眠500毫秒，让外面的更新操作可以执行到
         ThreadUtil.safeSleep(500);
+
         // 3、第2次获取
         UserEntity entity2 = this.getByIdWithRepeatableRead(id);
         System.out.println("entity2 getBalance: " + entity2.getBalance());
+    }
+
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @Override
+    public void readWithPhantomRead(int balance) {
+        LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<UserEntity>()
+                .eq(UserEntity::getBalance, balance);
+        // 1、第1次获取
+        List<UserEntity> list1 = this.list(queryWrapper);
+        System.out.println("list1:" + list1.size());
+
+        // 2、睡眠500毫秒，让外面的更新操作可以执行到
+        ThreadUtil.safeSleep(1000);
+
+        // 3、第2次获取
+        List<UserEntity> list2 = this.list(queryWrapper);
+        System.out.println("list2:" + list2.size());
+    }
+
+    @Transactional
+    @Override
+    public void saveSimple(UserEntity entity) {
+        this.baseMapper.insert(entity);
     }
 }
