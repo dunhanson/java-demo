@@ -1,17 +1,12 @@
 package site.dunhanson.spring.boot.transaction.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import site.dunhanson.spring.boot.transaction.dao.UserMapper;
-import site.dunhanson.spring.boot.transaction.model.entity.LogEntity;
 import site.dunhanson.spring.boot.transaction.model.entity.UserEntity;
-import site.dunhanson.spring.boot.transaction.service.intf.LogService;
 import site.dunhanson.spring.boot.transaction.service.intf.UserService;
-
-import javax.annotation.Resource;
 
 /**
  * <p>
@@ -23,36 +18,35 @@ import javax.annotation.Resource;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
-    @Resource
-    private LogService logService;
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @Override
-    public int add(UserEntity user) {
-        int rows = this.baseMapper.insert(user);
-        LogEntity log = new LogEntity();
-        log.setMessage("添加日志信息");
-        logService.add(log);
-        return rows;
+    public int getBalanceById(Integer id) {
+        UserEntity entity = this.baseMapper.selectById(id);
+        if(entity == null) {
+            return 0;
+        }
+        return entity.getBalance();
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public int add1(UserEntity user) {
-        int rows = this.baseMapper.insert(user);
-        LogEntity log = new LogEntity();
-        log.setMessage("添加日志信息");
-        logService.add1(log);
-        return rows;
-    }
+    public void updateBalance(Integer id, int newBalance) {
+        System.out.println("updateBalance start");
+        UserEntity entity = this.getById(id);
+        if(entity == null) {
+            return;
+        }
+        entity.setBalance(newBalance);
+        this.baseMapper.updateById(entity);
+        System.out.println("updateBalance finish");
+        // 睡眠500毫秒，模拟事务执行的时间
+        try {
+            System.out.println("updateBalance sleep start");
+            Thread.sleep(500);
+            System.out.println("updateBalance sleep finish");
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
 
-    @Transactional(propagation = Propagation.NESTED)
-    @Override
-    public int add2(UserEntity user) {
-        int rows = this.baseMapper.insert(user);
-        LogEntity log = new LogEntity();
-        log.setMessage("添加日志信息");
-        logService.add2(log);
-        return rows;
     }
 }

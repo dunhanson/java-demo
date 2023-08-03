@@ -1,12 +1,12 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://local-server.biaoxunkuaiche.com:3306/test?useTimezone=true&serverTimezone=GMT%2B8
-    username: develop
-    password: 'c5KgeddIrRLVrmJ2'
+    url: jdbc:mysql://192.168.33.10:3306/test?useTimezone=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  global-config:
-    enable-sql-runner: true
+  #configuration:
+  #  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #global-config:
+  #  enable-sql-runner: true

@@ -3,10 +3,8 @@ package site.dunhanson.spring.boot.transaction.model.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
 import java.io.Serializable;
-import java.time.LocalDateTime;
-
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,8 +19,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("user")
+@Builder
 public class UserEntity implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     /**
@@ -32,34 +30,12 @@ public class UserEntity implements Serializable {
     private Integer id;
 
     /**
-     * 用户名
+     * 用户姓名
      */
-    private String username;
+    private String name;
 
     /**
-     * 密码
+     * 账户余额
      */
-    private String password;
-
-    /**
-     * 图片
-     */
-    private String photo;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
-
-    /**
-     * 状态
-     */
-    private Integer state;
-
-
+    private Integer balance;
 }
