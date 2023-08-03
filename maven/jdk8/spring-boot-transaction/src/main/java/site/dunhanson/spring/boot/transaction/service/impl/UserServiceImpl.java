@@ -1,5 +1,6 @@
 package site.dunhanson.spring.boot.transaction.service.impl;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -50,13 +51,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         this.baseMapper.updateById(entity);
         System.out.println("updateBalance finish");
         // 睡眠500毫秒，模拟事务执行的时间
-        try {
-            System.out.println("updateBalance sleep start");
-            Thread.sleep(500);
-            System.out.println("updateBalance sleep finish");
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
+        System.out.println("updateBalance sleep start");
+        ThreadUtil.safeSleep(500);
+        System.out.println("updateBalance sleep finish");
+    }
 
+    @Override
+    public void updateBalanceSimple(Integer id, int newBalance) {
+        UserEntity entity = this.getById(id);
+        if(entity == null) {
+            return;
+        }
+        entity.setBalance(newBalance);
+        this.baseMapper.updateById(entity);
+    }
+
+    @Override
+    public void readTwiceInSameTransaction(Integer id) {
+        // 1、第1次获取
+        UserEntity entity1 = this.getById(id);
+        System.out.println("entity1 getBalance: " + entity1.getBalance());
+
+        // 2、睡眠500毫秒，让外面的更新操作可以执行到
+        ThreadUtil.safeSleep(500);
+        // 3、第2次获取
+        UserEntity entity2 = this.getById(id);
+        System.out.println("entity2 getBalance: " + entity2.getBalance());
     }
 }

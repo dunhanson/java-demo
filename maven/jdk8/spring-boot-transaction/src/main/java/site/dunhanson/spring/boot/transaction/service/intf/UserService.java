@@ -17,4 +17,8 @@ public interface UserService extends IService<UserEntity> {
     int getBalanceByIdReadCommitted(Integer id);
 
     void updateBalance(Integer id, int newBalance);
+
+    void updateBalanceSimple(Integer id, int newBalance);
+
+    void readTwiceInSameTransaction(Integer id);
 }
