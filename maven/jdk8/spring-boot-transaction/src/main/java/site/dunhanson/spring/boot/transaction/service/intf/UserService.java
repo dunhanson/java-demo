@@ -12,7 +12,9 @@ import site.dunhanson.spring.boot.transaction.model.entity.UserEntity;
  * @since 2023-07-31
  */
 public interface UserService extends IService<UserEntity> {
-    int getBalanceById(Integer id);
+    int getBalanceByIdReadUncommitted(Integer id);
+
+    int getBalanceByIdReadCommitted(Integer id);
 
     void updateBalance(Integer id, int newBalance);
 }

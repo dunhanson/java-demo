@@ -21,7 +21,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @Override
-    public int getBalanceById(Integer id) {
+    public int getBalanceByIdReadUncommitted(Integer id) {
+        UserEntity entity = this.baseMapper.selectById(id);
+        if(entity == null) {
+            return 0;
+        }
+        return entity.getBalance();
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Override
+    public int getBalanceByIdReadCommitted(Integer id) {
         UserEntity entity = this.baseMapper.selectById(id);
         if(entity == null) {
             return 0;

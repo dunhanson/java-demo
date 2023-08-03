@@ -5,11 +5,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 import site.dunhanson.spring.boot.transaction.model.entity.UserEntity;
 import site.dunhanson.spring.boot.transaction.service.intf.UserService;
+
 import javax.annotation.Resource;
 import java.util.UUID;
 
 @SpringBootTest
-class ReadUncommittedTest {
+class ReadCommittedTest {
     @Resource
     private UserService userService;
 
@@ -35,9 +36,9 @@ class ReadUncommittedTest {
             e.printStackTrace();
         }
 
-        // 3、在当前事务中读取用户余额，由于隔离级别为READ_UNCOMMITTED，可能读取到未提交的更新（脏读）
+        // 3、在当前事务中读取用户余额，隔离级别为READ_COMMITTED
         System.out.println("getBalanceById start");
-        int balance = userService.getBalanceByIdReadUncommitted(userId);
+        int balance = userService.getBalanceByIdReadCommitted(userId);
         System.out.println("getBalanceById finish");
         System.out.println("User balance: " + balance);
 
