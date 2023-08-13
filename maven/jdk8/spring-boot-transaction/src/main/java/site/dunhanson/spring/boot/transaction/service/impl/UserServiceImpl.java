@@ -99,6 +99,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         this.baseMapper.updateById(updateEntity);
     }
 
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     @Override
     public void readWithPhantomRead(Integer id) {
         UserEntity userEntity1 = this.baseMapper.selectById(id);
@@ -114,8 +115,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         log.info("2.3、userEntity2 id:{} balance:{}", userEntity2.getId(), userEntity2.getBalance());
     }
 
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     @Override
     public void deleteWithPhantomRead(Integer id) {
+        this.baseMapper.deleteById(id);
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Override
+    public void readWithSerializable(Integer id) {
+        UserEntity userEntity1 = this.baseMapper.selectById(id);
+        log.info("2.1、userEntity1 id:{} balance:{}", userEntity1.getId(), userEntity1.getBalance());
+
+        log.info("2.2、睡眠1秒，好让删除操作可以可以被执行到。");
+        ThreadUtil.safeSleep(1000);
+
+        UserEntity userEntity2 = this.baseMapper.selectById(id);
+        if(userEntity2 == null) {
+            userEntity2 = new UserEntity();
+        }
+        log.info("2.3、userEntity2 id:{} balance:{}", userEntity2.getId(), userEntity2.getBalance());
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Override
+    public void deleteWithSerializable(Integer id) {
         this.baseMapper.deleteById(id);
     }
 }

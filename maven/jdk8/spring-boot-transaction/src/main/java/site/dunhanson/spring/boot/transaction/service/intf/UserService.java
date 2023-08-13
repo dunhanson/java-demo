@@ -28,4 +28,9 @@ public interface UserService extends IService<UserEntity> {
     void readWithPhantomRead(Integer id);
 
     void deleteWithPhantomRead(Integer id);
+
+    void readWithSerializable(Integer id);
+
+    void deleteWithSerializable(Integer id);
+
 }
