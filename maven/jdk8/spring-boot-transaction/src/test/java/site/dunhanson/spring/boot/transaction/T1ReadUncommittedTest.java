@@ -16,6 +16,10 @@ class T1ReadUncommittedTest {
     @Resource
     private UserService userService;
 
+    /**
+     * 最低的隔离级别。在该级别下，一个事务可以读取到另一个事务未提交的数据，可能导致脏读，即读取到了未经验证的数据。
+     * 这个级别会导致数据的不一致性，并且不提供任何并发控制。
+     */
     @Test
     public void testReadUncommitted() {
         Assert.isTrue(true, "success");
@@ -32,7 +36,7 @@ class T1ReadUncommittedTest {
         log.info("2.1 userEntity1 id:{}, balance:{}", userEntity1.getId(), userEntity1.getBalance());
 
         // 第3步
-        log.info("3、对数据进行更新");
+        log.info("3、对数据进行更新（额外线程）");
         Thread thread = new Thread(() -> userService.updateBalanceWithReadUncommitted(user.getId(), 500));
         thread.start();
 

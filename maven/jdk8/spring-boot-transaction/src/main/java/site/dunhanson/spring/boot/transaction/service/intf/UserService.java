@@ -16,4 +16,8 @@ public interface UserService extends IService<UserEntity> {
     UserEntity readWithReadUncommitted(Integer id);
 
     void updateBalanceWithReadUncommitted(Integer id, int newBalance);
+
+    void readWithReadCommitted(Integer id);
+
+    void updateWithReadCommitted(Integer id, int newBalance);
 }
