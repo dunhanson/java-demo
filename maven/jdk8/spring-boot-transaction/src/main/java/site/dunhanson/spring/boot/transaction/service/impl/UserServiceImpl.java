@@ -140,6 +140,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Transactional(isolation = Isolation.SERIALIZABLE)
     @Override
     public void deleteWithSerializable(Integer id) {
+        log.info("4.1、deleteWithSerializable start");
         this.baseMapper.deleteById(id);
+        log.info("4.2、deleteWithSerializable end");
     }
 }
