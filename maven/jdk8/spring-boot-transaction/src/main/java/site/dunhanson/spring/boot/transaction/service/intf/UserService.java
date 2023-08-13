@@ -26,7 +26,7 @@ public interface UserService extends IService<UserEntity> {
 
     void readTwiceInSameTransactionWithRepeatableRead(Integer id);
 
-    void readWithPhantomRead(int balance);
+    void readWithPhantomRead();
 
     void saveSimple(UserEntity build);
 }

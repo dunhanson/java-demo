@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import site.dunhanson.spring.boot.transaction.dao.UserMapper;
 import site.dunhanson.spring.boot.transaction.model.entity.UserEntity;
 import site.dunhanson.spring.boot.transaction.service.intf.UserService;
-
 import java.util.List;
 
 /**
@@ -105,18 +104,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     @Transactional(isolation = Isolation.REPEATABLE_READ)
     @Override
-    public void readWithPhantomRead(int balance) {
-        LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<UserEntity>()
-                .eq(UserEntity::getBalance, balance);
+    public void readWithPhantomRead() {
         // 1、第1次获取
-        List<UserEntity> list1 = this.list(queryWrapper);
+        List<UserEntity> list1 = this.list();
         System.out.println("list1:" + list1.size());
 
         // 2、睡眠500毫秒，让外面的更新操作可以执行到
+        Thread thread = new Thread(() -> this.remove(new LambdaQueryWrapper<UserEntity>().last("limit 1")));
+        thread.start();
         ThreadUtil.safeSleep(1000);
 
         // 3、第2次获取
-        List<UserEntity> list2 = this.list(queryWrapper);
+        List<UserEntity> list2 = this.list();
         System.out.println("list2:" + list2.size());
     }
 
