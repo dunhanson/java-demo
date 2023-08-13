@@ -24,4 +24,8 @@ public interface UserService extends IService<UserEntity> {
     void readWithRepeatableRead(Integer id);
 
     void updateWithRepeatableRead(Integer id, int newBalance);
+
+    void readWithPhantomRead(Integer id);
+
+    void deleteWithPhantomRead(Integer id);
 }
