@@ -20,4 +20,8 @@ public interface UserService extends IService<UserEntity> {
     void readWithReadCommitted(Integer id);
 
     void updateWithReadCommitted(Integer id, int newBalance);
+
+    void readWithRepeatableRead(Integer id);
+
+    void updateWithRepeatableRead(Integer id, int newBalance);
 }

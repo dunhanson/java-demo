@@ -76,4 +76,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         updateEntity.setBalance(newBalance);
         this.baseMapper.updateById(updateEntity);
     }
+
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @Override
+    public void readWithRepeatableRead(Integer id) {
+        UserEntity userEntity1 = this.baseMapper.selectById(id);
+        log.info("2.1、userEntity1 id:{} balance:{}", userEntity1.getId(), userEntity1.getBalance());
+
+        log.info("2.2、睡眠1秒，好让更新操作可以可以被执行到。");
+        ThreadUtil.safeSleep(1000);
+
+        UserEntity userEntity2 = this.baseMapper.selectById(id);
+        log.info("2.3、userEntity2 id:{} balance:{}", userEntity2.getId(), userEntity2.getBalance());
+    }
+
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @Override
+    public void updateWithRepeatableRead(Integer id, int newBalance) {
+        UserEntity updateEntity = new UserEntity();
+        updateEntity.setId(id);
+        updateEntity.setBalance(newBalance);
+        this.baseMapper.updateById(updateEntity);
+    }
 }
