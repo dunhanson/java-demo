@@ -10,24 +10,12 @@ import site.dunhanson.spring.boot.transaction.service.intf.UserService;
 import javax.annotation.Resource;
 import java.util.UUID;
 
-/**
- * 读未提交
- * @author dunhanson
- * @since 2023-08-13
- * @version 1.0.0
- */
 @Slf4j
 @SpringBootTest
 class T1ReadUncommittedTest {
     @Resource
     private UserService userService;
 
-    /**
-     * 1、插入数据
-     * 2、第1次读取数据
-     * 3、对数据进行更新
-     * 4、第2次读取数据
-     */
     @Test
     public void testReadUncommitted() {
         Assert.isTrue(true, "success");
