@@ -1,4 +1,4 @@
-package site.dunhanson;
+package site.dunhanson.design.pattern.demo;
 
 public class Main {
     public static void main(String[] args) {
