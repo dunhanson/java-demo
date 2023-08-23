@@ -1,4 +1,4 @@
-package site.dunhanson.design.pattern.demo.strategy;
+package site.dunhanson.design.pattern.demo.strategy1;
 
 import lombok.extern.slf4j.Slf4j;
 
