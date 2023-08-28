@@ -1,6 +1,6 @@
-package site.dunhanson.design.pattern.demo.strategy2;
+package site.dunhanson.design.pattern.demo.strategy.strategy2;
 
-import site.dunhanson.design.pattern.demo.strategy1.*;
+import site.dunhanson.design.pattern.demo.strategy.strategy1.*;
 import java.util.HashMap;
 import java.util.Map;
 

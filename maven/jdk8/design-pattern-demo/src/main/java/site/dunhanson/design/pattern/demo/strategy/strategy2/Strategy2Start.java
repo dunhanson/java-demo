@@ -1,7 +1,7 @@
-package site.dunhanson.design.pattern.demo.strategy2;
+package site.dunhanson.design.pattern.demo.strategy.strategy2;
 
-import site.dunhanson.design.pattern.demo.strategy1.PromotionActivity;
-import site.dunhanson.design.pattern.demo.strategy1.PromotionStrategy;
+import site.dunhanson.design.pattern.demo.strategy.strategy1.PromotionActivity;
+import site.dunhanson.design.pattern.demo.strategy.strategy1.PromotionStrategy;
 
 public class Strategy2Start {
 

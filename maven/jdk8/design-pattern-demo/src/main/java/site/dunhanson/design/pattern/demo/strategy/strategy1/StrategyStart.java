@@ -1,4 +1,4 @@
-package site.dunhanson.design.pattern.demo.strategy1;
+package site.dunhanson.design.pattern.demo.strategy.strategy1;
 
 public class StrategyStart {
     public static void main(String[] args) {
