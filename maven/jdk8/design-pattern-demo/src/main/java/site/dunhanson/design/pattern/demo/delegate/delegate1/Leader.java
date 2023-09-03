@@ -1,4 +1,4 @@
-package site.dunhanson.design.pattern.demo.delegate;
+package site.dunhanson.design.pattern.demo.delegate.delegate1;
 
 import java.util.HashMap;
 import java.util.Map;

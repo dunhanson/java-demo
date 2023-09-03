@@ -1,4 +1,4 @@
-package site.dunhanson.design.pattern.demo.delegate;
+package site.dunhanson.design.pattern.demo.delegate.delegate1;
 
 public class EmployeeA implements Employee{
     @Override

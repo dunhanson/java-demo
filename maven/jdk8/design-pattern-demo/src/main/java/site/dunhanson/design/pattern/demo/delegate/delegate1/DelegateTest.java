@@ -1,4 +1,4 @@
-package site.dunhanson.design.pattern.demo.delegate;
+package site.dunhanson.design.pattern.demo.delegate.delegate1;
 
 public class DelegateTest {
     public static void main(String[] args) {
